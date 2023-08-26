@@ -1,42 +1,63 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;600;700&display=swap');
+
+html, body {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.padded {
+  padding: 32px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.gray-background {
+  background-color: var(--color-gray-transparent);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+article {
+  padding: 32px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-gray);
+  border-radius: 6px;
 }
 
-.card {
-  padding: 2em;
+.floating-button-container {
+  position: fixed;
+  top: 64px;
+  left: 0px;
+
+  width: 80px;
+  height: 80px;
+  padding: 8px;
+
+  border-radius: 6px;
+
+  background-color: var(--color-gray-transparent);
 }
 
-.read-the-docs {
-  color: #888;
+.floating-button-container button {
+  width: 100%;
+  height: 100%;
+
+  appearance: none;
+
+  border: none;
+  outline: none;
+
+  background-color: var(--color-orange);
+  border-radius: 6px;
+}
+
+* {
+  font-family: 'Azeret Mono', monospace;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-gray: #CED9D8;
+  --color-gray-transparent:rgb(243, 245, 245);
+  --color-orange: #FFA502;
+  --color-white: #FFFFFF;
+  --color-black: #212326;
 }

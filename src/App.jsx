@@ -43,14 +43,18 @@ setContent(content)
   })
 
   return (
-    <>
+    <div class="padded gray-background">
+      <div className='floating-button-container'>
+        <button>C</button>
+      </div>
+
       {Markdoc.renderers.react(content, React, {
     components: {
       Latexx: Latexx,
       Interaction: InteractionFunc
     }
   })}
-    </>
+    </div>
   )
 }
 
