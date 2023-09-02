@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import HammingIntro from './interactions/HammingIntro'
+import HammingGuessingGame from './interactions/HammingGuessingGame'
+import Repitition from './interactions/Repitition'
 
 const Interaction = (props) => {
     console.log(props)
     switch (props.props.key) {
-        case "1":
-            return <HammingIntro></HammingIntro>
+        case "4":
+            return <HammingGuessingGame></HammingGuessingGame>
+        case "2":
+            return <Repitition></Repitition>
         default:
             return <>Not found :(</>
     }

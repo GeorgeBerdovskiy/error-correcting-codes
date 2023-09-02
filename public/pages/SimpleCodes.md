@@ -38,6 +38,10 @@ Another simple code is the _triple repitition code_, in which we repeat our mess
 
 If all three differ, then it knows there's an error but cannot determine where the error is and/or which message is correct.
 
+{% interaction %}
+2
+{% /interaction %}
+
 ## Comparison
 Now that we've briefly explored three simple codes, how can we compare them and see which is best? It's necessary to now introduce several definitons.
 

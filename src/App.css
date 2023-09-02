@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;700&family=Lora:wght@400;500;600&display=swap');
 
 html, body {
 	width: 100%;
@@ -70,11 +70,88 @@ html, body {
 	outline: none;
 
 	font-family: "Lora", serif;
+	font-size: 1rem;
 	text-align: left;
+
+	transition: 0.25s ease all;
 }
 
 .page-buttons button.active {
 	font-weight: bold;
+}
+
+/* LaTeX and Interactions */
+.interaction-container {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.interaction-container .interaction {
+	width: 500px;
+	max-width: 100%;
+
+	background-color: var(--color-white);
+	border: 1px solid var(--color-gray);
+	border-radius: 6px;
+
+	padding: 32px;
+}
+
+.field-and-button {
+	display: flex;
+}
+
+.field-and-button input {
+	margin-right: 16px;
+}
+
+button.standard {
+	padding: 4px 8px 4px 8px;
+
+	appearance: none;
+	background-color: var(--color-orange);
+	border-radius: 6px;
+
+	border: 1px solid #ca8e21;
+	outline: none;
+
+	font-family: "Lora", serif;
+	font-weight: bold;
+	color: var(--color-white);
+
+	cursor: pointer;
+	transition: 0.25s ease all;
+}
+
+input[type="text"] {
+	background-color: var(--color-gray-transparent);
+	border: 1px solid var(--color-gray);
+	border-radius: 6px;
+	padding: 8px;
+
+	font-family: "Lora", serif;
+	font-size: 1rem;
+
+	outline: none;
+	flex-grow: 1;
+}
+
+input[type="text"].mono {
+	font-family: 'Azeret Mono', monospace;
+}
+
+.larger-result, .larger-result {
+	margin-top: 16px;
+	font-size: 1.25rem;
+	line-height: 1.5rem;
+	text-align: center;
+	display: block;
+}
+
+.larger-result.mono {
+	font-family: 'Azeret Mono', monospace;
 }
 
 span.__Latex__ {
@@ -108,6 +185,7 @@ span.__Latex__ {
 }
 
 h1 {
+	font-family: "Lora", serif;
 	font-weight: 500;
 	font-size: 2.25rem;
 	line-height: 2.25rem;
@@ -117,6 +195,7 @@ h1 {
 }
 
 h2 {
+	font-family: "Lora", serif;
 	font-size: 1.5rem;
 	line-height: 1.5rem;
 
@@ -125,6 +204,7 @@ h2 {
 }
 
 p {
+	font-family: "Lora", serif;
 	font-weight: 400;
 	font-size: 1rem;
 	line-height: 1.25rem;
@@ -134,7 +214,6 @@ p {
 }
 
 * {
-	font-family: 'Lora', serif;
 	box-sizing: border-box;
 }
 

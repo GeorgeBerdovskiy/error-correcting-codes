@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Latex from 'react-latex-next';
 import Markdoc from '@markdoc/markdoc';
 
@@ -12,7 +12,13 @@ import './App.css';
 import 'katex/dist/katex.min.css';
 
 function InteractionFunction({children}) {
-  return <Interaction props={{ key: children.props.children }}></Interaction>;
+  return (
+    <div className='interaction-container'>
+      <div className='interaction'>
+        <Interaction props={{ key: children.props.children }}></Interaction>
+      </div>
+    </div>
+  );
 }
 
 function LatexFunction({children}) {
@@ -29,6 +35,7 @@ const config = {
 function App() {
   const [content, setContent] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
+  const [activePage, setActivePage] = useState("HammingCodes");
 
   function toggleMenu() {
     if (menuVisible) {
@@ -52,13 +59,24 @@ function App() {
     setMenuVisible(!menuVisible);
   }
 
-  fetch("/pages/SimpleCodes.md").then((response) => response.text()).then((text) => {
-    const source = text;
-    const ast = Markdoc.parse(source);
-    const content = Markdoc.transform(ast, config);
+  useEffect(() => {
+    // Hide menu
+    setMenuVisible(false);
+    document.getElementsByClassName("page-buttons")[0].style.opacity = "0";
 
-    setContent(content)
-  });
+    setTimeout(() => {
+      document.getElementsByClassName("left")[0].style.width = "96px";
+      document.getElementsByClassName("right")[0].style.width = "calc(100% - 96px)";
+    }, 150);
+
+    fetch(`/pages/${activePage}.md`).then((response) => response.text()).then((text) => {
+      const source = text;
+      const ast = Markdoc.parse(source);
+      const content = Markdoc.transform(ast, config);
+  
+      setContent(content)
+    });
+  }, [activePage])
 
   return (
     <div className='padded gray-background split'>
@@ -66,8 +84,11 @@ function App() {
         <button className='menu-button' onClick={toggleMenu}><img src={ Menu }/></button>
 
         <div className='page-buttons'>
-          <button>Introduction</button>
-          <button className='active'>Three Simple Codes</button>
+          <button className={`${activePage == "Introduction" ? "active" : ""}`} onClick={() => setActivePage("Introduction")}>Introduction</button>
+          <button className={`${activePage == "Definitions" ? "active" : ""}`} onClick={() => setActivePage("Definitions")}>Definitions</button>
+          <button className={`${activePage == "SimpleCodes" ? "active" : ""}`} onClick={() => setActivePage("SimpleCodes")}>Three Simple Codes</button>
+          <button className={`${activePage == "HammingCodes" ? "active" : ""}`} onClick={() => setActivePage("HammingCodes")}>Hamming Codes</button>
+          <button className={`${activePage == "ReedSolomonCodes:" ? "active" : ""}`} onClick={() => setActivePage("ReedSolomonCodes")}>Reed-Solomon Codes</button>
         </div>
       </div>
 
