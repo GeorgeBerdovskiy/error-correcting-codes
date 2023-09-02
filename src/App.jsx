@@ -62,16 +62,16 @@ function App() {
 
   return (
     <div className='padded gray-background split'>
-			<div className='left'>
-				<button className='menu-button' onClick={toggleMenu}><img src={ Menu }/></button>
+      <div className='left'>
+        <button className='menu-button' onClick={toggleMenu}><img src={ Menu }/></button>
 
         <div className='page-buttons'>
           <button>Introduction</button>
           <button className='active'>Three Simple Codes</button>
         </div>
-			</div>
+      </div>
 
-			<div className='right'>
+      <div className='right'>
         {
           Markdoc.renderers.react(content, React, {
             components: {
@@ -81,7 +81,7 @@ function App() {
           })
         }
       </div>
-	  </div>
+    </div>
   )
 }
 

@@ -53,7 +53,7 @@ html, body {
 
 .right article {
 	display: flex;
-    flex-wrap: wrap;
+		flex-wrap: wrap;
 }
 
 .page-buttons {
@@ -134,14 +134,14 @@ p {
 }
 
 * {
-  font-family: 'Lora', serif;
-  box-sizing: border-box;
+	font-family: 'Lora', serif;
+	box-sizing: border-box;
 }
 
 :root {
-  --color-gray: #CED9D8;
-  --color-gray-transparent:rgb(243, 245, 245);
-  --color-orange: #FFA502;
-  --color-white: #FFFFFF;
-  --color-black: #212326;
+	--color-gray: #CED9D8;
+	--color-gray-transparent:rgb(243, 245, 245);
+	--color-orange: #FFA502;
+	--color-white: #FFFFFF;
+	--color-black: #212326;
 }
