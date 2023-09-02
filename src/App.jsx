@@ -9,17 +9,15 @@ import { interaction } from './schema/Interaction.markdoc'
 import Interaction from './Interaction'
 import 'katex/dist/katex.min.css'
 
-function Callout({ children }) {
-  return <div className="callout">{children}</div>;
-}
+import Menu from "./assets/images/menu.png"
 
-function InteractionFunc({children}) {
+function InteractionFunction({children}) {
   return <Interaction props={{
     key: children.props.children
   }}></Interaction>
 }
 
-function Latexx({children}) {
+function LatexFunction({children}) {
   return  <Latex>{children.props.children}</Latex>;
 }
 
@@ -43,18 +41,21 @@ setContent(content)
   })
 
   return (
-    <div class="padded gray-background">
-      <div className='floating-button-container'>
-        <button>C</button>
-      </div>
+    <div class="padded gray-background split">
+			<div className='left'>
+				<button className='menu-button'><img src={ Menu }/></button>
+			</div>
+
+			<div className='right'>
 
       {Markdoc.renderers.react(content, React, {
     components: {
-      Latexx: Latexx,
-      Interaction: InteractionFunc
+      LatexFunction: LatexFunction,
+      Interaction: InteractionFunction
     }
   })}
     </div>
+	</div>
   )
 }
 

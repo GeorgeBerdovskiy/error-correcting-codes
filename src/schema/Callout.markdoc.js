@@ -1,7 +1,7 @@
 // ./schema/Callout.markdoc.js
 
 export const latexx = {
-    render: 'Latexx',
+    render: 'LatexFunction',
     children: ['paragraph', 'tag', 'list'],
     attributes: {
       type: {

@@ -1,56 +1,110 @@
-@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap');
 
 html, body {
-  width: 100%;
-  height: 100%;
-  padding: 0px;
-  margin: 0px;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	overflow: hidden;
+}
+
+#root {
+	height: 100%;
+	overflow-y: auto;
 }
 
 .padded {
-  padding: 32px;
+	padding: 24px;
 }
 
 .gray-background {
-  background-color: var(--color-gray-transparent);
+	background-color: var(--color-gray-transparent);
 }
 
-article {
-  padding: 32px;
-  background-color: var(--color-white);
-  border: 1px solid var(--color-gray);
-  border-radius: 6px;
+.split {
+	display: flex;
+	height: 100%;
 }
 
-.floating-button-container {
-  position: fixed;
-  top: 64px;
-  left: 0px;
+.left {
+	width: 80px;
+	height: 80px;
+	padding: 16px;
 
-  width: 80px;
-  height: 80px;
-  padding: 8px;
+	height: 100%;
 
-  border-radius: 6px;
+	border-radius: 6px;
 
-  background-color: var(--color-gray-transparent);
+	padding: 24px;
+	background-color: var(--color-white);
+	border: 1px solid var(--color-gray);
+	border-radius: 6px;
+
+	margin-right: 24px;
 }
 
-.floating-button-container button {
-  width: 100%;
-  height: 100%;
+.right {
+	flex-grow: 1;
+	padding: 24px;
+	background-color: var(--color-white);
+	border: 1px solid var(--color-gray);
+	border-radius: 6px;
+}
 
-  appearance: none;
+.menu-button {
+	width: 32px;
+	height: 32px;
 
-  border: none;
-  outline: none;
+	padding: 4px;
 
-  background-color: var(--color-orange);
-  border-radius: 6px;
+	appearance: none;
+	background-color: var(--color-orange);
+	border-radius: 6px;
+
+	border: 1px solid #ca8e21;
+	outline: none;
+
+	cursor: pointer;
+	transition: 0.25s ease all;
+}
+
+.menu-button:hover {
+	transform: scale(1.05);
+}
+
+.menu-button img {
+	width: 100%;
+	height: 100%;
+}
+
+h1 {
+	font-weight: 500;
+	font-size: 2.25rem;
+	line-height: 2.25rem;
+
+	margin: 0px;
+	margin-bottom: 24px;
+}
+
+h2 {
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+
+	margin: 0px;
+	margin-bottom: 24px;
+}
+
+p {
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1rem;
+
+	margin: 0px;
+	margin-bottom: 16px;
 }
 
 * {
-  font-family: 'Azeret Mono', monospace;
+  font-family: 'Lora', serif;
   box-sizing: border-box;
 }
 
