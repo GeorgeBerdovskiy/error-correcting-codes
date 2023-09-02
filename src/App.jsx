@@ -1,24 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import Latex from 'react-latex-next'
-import Markdoc from '@markdoc/markdoc'
-import { latexx } from './schema/Callout.markdoc';
-import { interaction } from './schema/Interaction.markdoc'
-import Interaction from './Interaction'
-import 'katex/dist/katex.min.css'
+import React, {  useState } from 'react';
+import Latex from 'react-latex-next';
+import Markdoc from '@markdoc/markdoc';
 
-import Menu from "./assets/images/menu.png"
+import { latexx } from './schema/Callout.markdoc';
+import { interaction } from './schema/Interaction.markdoc';
+
+import Interaction from './Interaction';
+import Menu from './assets/images/menu.png';
+
+import './App.css';
+import 'katex/dist/katex.min.css';
 
 function InteractionFunction({children}) {
-  return <Interaction props={{
-    key: children.props.children
-  }}></Interaction>
+  return <Interaction props={{ key: children.props.children }}></Interaction>;
 }
 
 function LatexFunction({children}) {
-  return  <Latex>{children.props.children}</Latex>;
+  return <Latex>{children.props.children}</Latex>;
 }
 
 const config = {
@@ -29,7 +27,7 @@ const config = {
 };
 
 function App() {
-  const [content, setContent] = useState("")
+  const [content, setContent] = useState("");
   const [menuVisible, setMenuVisible] = useState(false);
 
   function toggleMenu() {
@@ -39,7 +37,7 @@ function App() {
 
       setTimeout(() => {
         document.getElementsByClassName("left")[0].style.width = "96px";
-      document.getElementsByClassName("right")[0].style.width = "calc(100% - 96px)";
+        document.getElementsByClassName("right")[0].style.width = "calc(100% - 96px)";
       }, 150);
     } else {
       // Show menu
@@ -54,18 +52,16 @@ function App() {
     setMenuVisible(!menuVisible);
   }
 
-
-
   fetch("/pages/SimpleCodes.md").then((response) => response.text()).then((text) => {
-    const source = text
-const ast = Markdoc.parse(source);
-const content = Markdoc.transform(ast, config);
+    const source = text;
+    const ast = Markdoc.parse(source);
+    const content = Markdoc.transform(ast, config);
 
-setContent(content)
-  })
+    setContent(content)
+  });
 
   return (
-    <div class="padded gray-background split">
+    <div className='padded gray-background split'>
 			<div className='left'>
 				<button className='menu-button' onClick={toggleMenu}><img src={ Menu }/></button>
 
@@ -76,15 +72,16 @@ setContent(content)
 			</div>
 
 			<div className='right'>
-
-      {Markdoc.renderers.react(content, React, {
-    components: {
-      LatexFunction: LatexFunction,
-      Interaction: InteractionFunction
-    }
-  })}
-    </div>
-	</div>
+        {
+          Markdoc.renderers.react(content, React, {
+            components: {
+              LatexFunction: LatexFunction,
+              Interaction: InteractionFunction
+            }
+          })
+        }
+      </div>
+	  </div>
   )
 }
 
