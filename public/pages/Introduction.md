@@ -1,31 +1,10 @@
----
-title: What is Markdoc?
----
+# Error Correcting Codes
+## Introduction
 
-# Somethin
+If your friend has ever sent you a text message with a typo, you can usually figure out the intended word. That's because we subconsciously consider context and language rules as we read.
 
-Markdoc is a Markdown-based syntax and toolchain for creating custom documentation sites. Stripe created Markdoc to power [our public docs](http://stripe.com/docs).
+Digital communications are also prone to errors. Satellite radio waves may experience interference as they beam Family Guy to your television. Hardware components inside your computer can malfunction and degrade over time, causing data corruption. These processes are inevitable, so we must design communication systems that account for their effects. This is called _fault tolerance_.
 
-{% callout type="check" %}
-Markdoc is open-source—check out its [source](http://github.com/markdoc/markdoc) to see how it works.
-{% /callout %}
+However, we can't just tell our computer to guess what the message was supposed to be. It's not human and is incapable of thought. Therefore, we want to develop an algorithm that systematically detects and corrects errors in received messages. That's where the **coding theory** saves the day!
 
-{% latexx %}
-$\sum_{i=1}^{n} i^2$
-{% /latexx %}
-
-{% interaction %}
-1
-{% /interaction %}
-
-{% interaction %}
-2
-{% /interaction %}
-
-## How is Markdoc different?
-
-Markdoc uses a fully declarative approach to composition and flow control, where other solutions… [Read more](/docs/overview).
-
-## Next steps
-- [Install Markdoc](/docs/getting-started)
-- [Explore the syntax](/docs/syntax)
+## Coding Theory
