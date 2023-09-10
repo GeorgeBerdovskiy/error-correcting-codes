@@ -9,7 +9,7 @@ The basic idea is to create a block where each bit position, that represents a p
 
 For example, here is a 4x4 Hamming Block
 
-{% latexx %} 
+{% latexx type="fullwidth" %} 
 $\begin{array}{cccc} 1 & 1 & 1 & 0 \\\ 0 & 1 & 0 & 0 \\\ 0 & 1 & 1 & 1 \\\ 0 & 0 & 1 & 0 \\ \end{array}$ 
 {% /latexx %}
 
@@ -22,7 +22,7 @@ If we take a look at our parity checks in our example, we can see that the total
 
 Now let's introduce an error in the block at position 13.
 
-{% latexx %} 
+{% latexx type="fullwidth" %} 
 $\begin{array}{cccc} 1 & 1 & 1 & 0 \\\ 0 & 1 & 0 & 0 \\\ 0 & 1 & 1 & 1 \\\ 0 & 1 & 1 & 0 \\ \end{array}$ 
 {% /latexx %}  
 

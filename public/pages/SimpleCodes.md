@@ -21,7 +21,7 @@ $\hspace{0.1cm} \texttt{1100001}$
 
 You can represent any integer between 0 and 255 using eight bits, but since English only requires about 80 characters, seven bits should be enough.
 
-{% latexx %}
+{% latexx type="fullwidth" %}
 $\texttt{1100001} \rightarrow a \\\ \texttt{1011010} \rightarrow Z \\\ \texttt{0100101} \rightarrow \\%$
 {% /latexx %}
 

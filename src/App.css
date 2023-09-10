@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;700&family=Lora:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@400;700&family=Manrope:wght@400;500;800&display=swap');
 
 html, body {
 	width: 100%;
@@ -23,6 +23,7 @@ html, body {
 
 .split {
 	display: flex;
+	min-height: 100%;
 }
 
 .left, .right {
@@ -57,30 +58,54 @@ html, body {
 }
 
 .page-buttons {
+	margin-top: 16px;
 	opacity: 0;
 	transition: 0.25s all ease;
 }
 
-.page-buttons button {
+.page-buttons a {
 	display: block;
 	appearance: none;
+	margin-bottom: 8px;
 
 	background-color: rgba(0, 0, 0, 0);
 	border: none;
 	outline: none;
 
-	font-family: "Lora", serif;
+	font-family: "Manrope", sans-serif;
+	font-weight: 500;
 	font-size: 1rem;
+	line-height: 1.25rem;
 	text-align: left;
 
-	transition: 0.25s ease all;
+	color: black;
+	text-decoration: none;
+
+	transition: ease 0.25s all;
+	transform-origin: center left;
 }
 
-.page-buttons button.active {
+.page-buttons a:hover {
+	transform: scale(1.02);
+}
+
+.page-buttons a.active {
 	font-weight: bold;
 }
 
 /* LaTeX and Interactions */
+.fullwidth-latex {
+	width: 100%;
+	margin-top: 16px;
+	margin-bottom: 32px;
+	display: flex;
+}
+
+
+.fullwidth-latex .__Latex__ {
+	margin: 0 auto;
+}
+
 .interaction-container {
 	width: 100%;
 	display: flex;
@@ -117,7 +142,7 @@ button.standard {
 	border: 1px solid #ca8e21;
 	outline: none;
 
-	font-family: "Lora", serif;
+	font-family: "Manrope", sans-serif;
 	font-weight: bold;
 	color: var(--color-white);
 
@@ -131,7 +156,7 @@ input[type="text"] {
 	border-radius: 6px;
 	padding: 8px;
 
-	font-family: "Lora", serif;
+	font-family: "Manrope", sans-serif;
 	font-size: 1rem;
 
 	outline: none;
@@ -184,9 +209,13 @@ span.__Latex__ {
 	height: 100%;
 }
 
+h1, h2 {
+	width: 100%;
+}
+
 h1 {
-	font-family: "Lora", serif;
-	font-weight: 500;
+	font-family: "Manrope", sans-serif;
+	font-weight: 800;
 	font-size: 2.25rem;
 	line-height: 2.25rem;
 
@@ -195,7 +224,7 @@ h1 {
 }
 
 h2 {
-	font-family: "Lora", serif;
+	font-family: "Manrope", sans-serif;
 	font-size: 1.5rem;
 	line-height: 1.5rem;
 
@@ -204,10 +233,10 @@ h2 {
 }
 
 p {
-	font-family: "Lora", serif;
+	font-family: "Manrope", sans-serif;
 	font-weight: 400;
 	font-size: 1rem;
-	line-height: 1.25rem;
+	line-height: 1.5rem;
 
 	margin: 0px;
 	margin-bottom: 16px;

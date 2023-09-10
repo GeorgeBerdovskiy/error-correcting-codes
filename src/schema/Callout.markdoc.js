@@ -6,8 +6,8 @@ export const latexx = {
     attributes: {
       type: {
         type: String,
-        default: 'note',
-        matches: ['caution', 'check', 'note', 'warning'],
+        default: 'inline',
+        matches: ['inline', 'fullwidth'],
         errorLevel: 'critical'
       },
       title: {
