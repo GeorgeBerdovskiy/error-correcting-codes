@@ -95,7 +95,7 @@ $\textrm{The Hamming distance $d(u, v)$ between two words $u$ and $v$ is the num
 
 > Note that the Hamming distance satisfies the distance axioms!
 
-Clearly, it's impossible for a linear code to reliably detect _and_ fix every single error that occurs. There's a limit, as we've already seen from the three simple examples on the last page. And as it turns out, we can mathematically define this limit.
+Clearly, it's impossible for a linear code to reliably detect _and_ fix every single error that occurs. There's a limit, as we've already seen from the two simple examples on the last page. And as it turns out, we can mathematically define this limit.
 
 {% latexx type="fullwidth" %}
 $\textrm{The } \textbf{minimum distance } \textrm{$d(C)$ of $C$ (an $(n, m)$ code) is the smallest Hamming} \\\ \textrm{distance between distinct code words of $C$.}$

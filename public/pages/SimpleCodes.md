@@ -1,6 +1,6 @@
-# Three Simple Codes
+# Two Simple Codes
 
-We'll begin our exploration of error-correcting codes by examining three simple codes presented in Oliver Pretzel's _Error-Correcting Codes and Finite Fields_.
+We'll begin our exploration of error-correcting codes by examining two simple codes presented in Oliver Pretzel's _Error-Correcting Codes and Finite Fields_.
 
 ## The ASCII Parity Check
 Most modern computers store information in chunks of memory called _bytes_. Each byte contains eight _bits_. Most computers also use a code called ASCII (American Standard Code for Information Interchange) to represent characters using bytes.

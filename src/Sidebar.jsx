@@ -36,7 +36,7 @@ const Sidebar = () => {
 
 			<div className='page-buttons'>
 				<a className={`${activePath == "introduction" ? "active" : ""}`} href="introduction">Introduction</a>
-				<a className={`${activePath == "simple-codes" ? "active" : ""}`} href="simple-codes">Three Simple Codes</a>
+				<a className={`${activePath == "simple-codes" ? "active" : ""}`} href="simple-codes">Two Simple Codes</a>
 				<a className={`${activePath == "definitions" ? "active" : ""}`} href="definitions">Definitions</a>
 				<a className={`${activePath == "hamming" ? "active" : ""}`} href="hamming">Hamming Codes</a>
 				<a className={`${activePath == "reed-solomon" ? "active" : ""}`} href="reed-solomon">Reed-Solomon Codes</a>
