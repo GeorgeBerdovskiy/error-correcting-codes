@@ -174,7 +174,7 @@ const HammingGuessingGame = () => {
       const hints = [];
   
       if (errorPosition[0] === 1) {
-        hints.push('Error detected in odd columns!');
+        hints.push('Error detected in even columns!');
       }
       if (errorPosition[1] === 1) {
         hints.push('Error detected on the right-hand side!');
