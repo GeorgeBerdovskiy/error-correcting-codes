@@ -27,8 +27,6 @@ MULTIPLICATION:
 Note: For SUBTRACTION and DIVISION, use the Additive or Multiplicative inverse to calculate.
 
 
-# Galois Fields
-
 # Lagrange Interpolations
 
 Now let's shift focus for a second and go over Lagrange Interpolations, another puzzle piece used in RS Codes. A Lagrange Interpolation will take n coordinates and give us a polynomial of degree n-1, which goes through and is completely unique to the coordinates it is created from.
@@ -113,7 +111,7 @@ Then plug in x = 0, 1, 2, 3 to find our original values and fill in any holes.
 
 We have now encoded and retrieved successfully all of our data! 
 
-
+{% interaction %} ? {% /interaction %}
 
 Sources: vcubingx (Youtube), GeeksforGeeks.org
     
