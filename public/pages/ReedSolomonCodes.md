@@ -26,6 +26,11 @@ MULTIPLICATION:
 
 Note: For SUBTRACTION and DIVISION, use the Additive or Multiplicative inverse to calculate.
 
+# Galois Fields
+
+A Galois Field is a field that contains a finite set of elements. By definition, it is a set that under the basic operations of addition, subtraction, multiplication, and division are defined. Sound familiar? One incredibily common example of a Galois field is the modular operation. For example, a mod 5 outputs only the numbers 0 through 4, a finite field! 
+
+Galois fields are used in RS coding because the data is represented using a finite number of bits. By using modular arithmetic, we ensure that our arithmetic "wraps around" within a set range, which is crucial when doing error correction calculations. This is important because when working with data, overflow and underflow errors (where output can exceed an expected range) are common and can lead to incorrect or even undefined outputs. This also ensures the integrity of the data through noise, because the finite field limits the possibilites of manipulating the data incorrectly. Another benefit is that it makes it easier to locate errors as you map the error coefficients in the polynomial back into the finite field. Finally, mod arithmetic makes for a much more computationally efficient program, limiting space and time needed to error correct in real-time. 
 
 # Lagrange Interpolations
 
@@ -37,7 +42,7 @@ For the purpose of this example, let's use 3 coordinates:
     (3, 2)
     (4, -1)
 
-To find the aforementioned polynomial, we'll break the process down into steps. First, create 3 polynomials, 1 for each coordinate. These are called Lagrange polynomials. Each polynomial (one per coordinate) goes through (x-value, 1) and has 2 x-intercepts/roots/etc. (x-value, 0) at the other coordinates. Here's what our first Lagrange polynomial would be:
+To find the aforementioned polynomial, we'll break the process down into steps. First, create 3 polynomials, 1 for each coordinate. These are called Lagrange polynomials. Each polynomial (one per coordinate) goes through (x-value, 1) and has 2 x-intercepts/roots/etc. (x-value, 0) at the other coordinates. Here's what our Lagrange polynomials would be:
 
 (1,2)
 
@@ -48,10 +53,31 @@ To find the aforementioned polynomial, we'll break the process down into steps. 
     p(x) = L1(x) = (1/6)(x-2)(x-4)
 
 
+(3,2)
+
+    p(x) = L2(x) = a(x-1)(x-4)
+    1 = a(3-1)(3-4)
+    1 = 2 * -1 * a
+    a = -1/2
+
+(4, -1)
+
+    p(x) = L3(X) = a(x-1)(x-3)
+    1 = a(4-1)(4-3)
+    1 = 3 * 1 * a
+    a = 1/3
+
+    
 Continue with the rest. 
 
 
-Now that we have our three equations, we have to combine them into 1 equation that goes through all the points by multiplying each Lagrange polynomial by their y-coordinate and adding them together to get -x^2 + 4x -1. 
+Now that we have our three equations, we have to combine them into 1 equation that goes through all the points by multiplying each Lagrange polynomial by their y-coordinate and adding them together. 
+
+    L(x) = 2L1(x) * 2L2(x) * -L3(x)
+    .
+    .
+    .
+    L(x) = -x^2 + 4x -1
 
 This equation goes through all 3 points. We can now apply this to modular arithmetic in our RS codes!
 
