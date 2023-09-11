@@ -1,48 +1,52 @@
 # Reed-Solomon Codes
 
-Reed-Solomon codes are a type of non-binary error-correcting code that use polynomials to track input data. They were invented by Irving S. Reed and Gustave Solomon as an alternative to binary encoders. This means that RS Codes operate on multiple bits rather than individual bits to track data. In this lesson, we'll recap modular arithmetic and put together LaGrange Interpolations to see an overarching look at RS codes. 
+Reed-Solomon codes are a type of non-binary error-correcting code that use polynomials to track input data. They were invented by Irving S. Reed and Gustave Solomon as an alternative to binary encoders. This means that RS Codes operate on multiple bits rather than individual bits to track data. In this lesson, we'll recap modular arithmetic and put together LaGrange Interpolations for an overarching look at RS codes. 
 
-# Modular Arithmetic
+## Modular Arithmetic
 
 By now, modular arithmetic should be a quick review, but just in case, we'll go over it in this section! Galois studied mod arithmetic and soon we'll see how it all comes together to create an RS code.
 
 If you'll recall:
 
-    a ≡ b mod p
+{% latexx type="fullwidth" %}
+$a \equiv b \mod p$
+{% /latexx %}
 
 where "≡" means "congruent", and a and b have the same remainder when divided by p. In "mod space", we can perform the same operations we're used to (addition, subtraction, multiplication, division), with some small changes in the way we calculate. For example:
 
-ADDITION:
 
-    1 + 2 = 3
-    3 mod 5 ≡ 3
-    ∴ 1 + 2 ≡ 3
+### Addition
 
-MULTIPLICATION:
+{% latexx type="fullwidth" %}
+$1 + 2 = 3 \quad \quad 3 \mod 5 \equiv 3 \quad \quad \therefore 1 + 2 \equiv 3$
+{% /latexx %}
 
-    2 * 3 = 6
-    6 mod 5 ≡ 1
-    ∴ 2 * 3 ≡ 1
+### Multiplication
 
-Note: For SUBTRACTION and DIVISION, use the Additive or Multiplicative inverse to calculate.
+{% latexx type="fullwidth" %}
+$2 \cdot 3 = 6 \quad \quad 6 \mod 5 \equiv 1 \quad \quad \therefore 2 \cdot 3 \equiv 1$
+{% /latexx %}
 
-# Galois Fields
+> For _subtraction_ and _division_, use the additive or multiplicative inverse to calculate.
 
-A Galois Field is a field that contains a finite set of elements. By definition, it is a set that under the basic operations of addition, subtraction, multiplication, and division are defined. Sound familiar? One incredibily common example of a Galois field is the modular operation. For example, a mod 5 outputs only the numbers 0 through 4, a finite field! 
+## Galois Fields
+
+A Galois Field is a field that contains a finite set of elements. By definition, it is a set for which the basic operations of addition, subtraction, multiplication, and division are defined. Sound familiar? One incredibily common example of a Galois field is the modular operation. For example, a mod 5 outputs only the numbers 0 through 4, a finite field! 
 
 Galois fields are used in RS coding because the data is represented using a finite number of bits. By using modular arithmetic, we ensure that our arithmetic "wraps around" within a set range, which is crucial when doing error correction calculations. This is important because when working with data, overflow and underflow errors (where output can exceed an expected range) are common and can lead to incorrect or even undefined outputs. This also ensures the integrity of the data through noise, because the finite field limits the possibilites of manipulating the data incorrectly. Another benefit is that it makes it easier to locate errors as you map the error coefficients in the polynomial back into the finite field. Finally, mod arithmetic makes for a much more computationally efficient program, limiting space and time needed to error correct in real-time. 
 
-# Lagrange Interpolations
+## Lagrange Interpolations
 
 Now let's shift focus for a second and go over Lagrange Interpolations, another puzzle piece used in RS Codes. A Lagrange Interpolation will take n coordinates and give us a polynomial of degree n-1, which goes through and is completely unique to the coordinates it is created from.
 
 For the purpose of this example, let's use 3 coordinates:
 
-    (1,2)
-    (3, 2)
-    (4, -1)
+{% latexx type="fullwidth" %}
+$(1,2) \\\ (3, 2) \\\ (4, -1)$
+{% /latexx %}
 
 To find the aforementioned polynomial, we'll break the process down into steps. First, create 3 polynomials, 1 for each coordinate. These are called Lagrange polynomials. Each polynomial (one per coordinate) goes through (x-value, 1) and has 2 x-intercepts/roots/etc. (x-value, 0) at the other coordinates. Here's what our Lagrange polynomials would be:
+
 
 (1,2)
 
@@ -51,7 +55,6 @@ To find the aforementioned polynomial, we'll break the process down into steps. 
     1 = -2 * -3 * a
     a = 1/6
     p(x) = L1(x) = (1/6)(x-2)(x-4)
-
 
 (3,2)
 
@@ -67,7 +70,6 @@ To find the aforementioned polynomial, we'll break the process down into steps. 
     1 = 3 * 1 * a
     a = 1/3
 
-    
 Continue with the rest. 
 
 

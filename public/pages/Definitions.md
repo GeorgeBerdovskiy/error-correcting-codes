@@ -75,7 +75,7 @@ $\textrm{An ($n ,m$)-block code $C$ over the alphabet $A$ of size $q$ \\\ consis
 Now, we can define the _encoder_ and _decoder_.
 
 {% latexx type="fullwidth" %}
-$\textrm{An encoder $E$ for $C$ is a map from $A^{m}$ to $C$. It translates any $A$-word $x$ of length $m$ into a code word $u = E(x)$. \\\ The encoder is a} \textit{ bijective } \textrm{function.}$
+$\textrm{An encoder $E$ for $C$ is a map from $A^{m}$ to $C$. It translates any $A$-word $x$ of length $m$ into a code word} \\\ \textrm{$u = E(x)$. The encoder is a} \textit{ bijective } \textrm{function.}$
 {% /latexx %}
 
 {% latexx type="fullwidth" %}
@@ -90,7 +90,7 @@ $\textrm{If $u = (0, 1, 0, 1, 0, 0)$ is sent and $v = \(\color{red} 1 \color{bla
 {% /latexx %}
 
 {% latexx type="fullwidth" %}
-$\textrm{The Hamming distance $d(u, v)$ between two words $u$ and $v$ is the number of entries in which they differ. The Hamming weight wt($u$) of $u$ is the number of non-null entries in $u$.}$
+$\textrm{The Hamming distance $d(u, v)$ between two words $u$ and $v$ is the number of entries in which they} \\\ \textrm{differ. The Hamming weight wt($u$) of $u$ is the number of non-null entries in $u$.}$
 {% /latexx %}
 
 > Note that the Hamming distance satisfies the distance axioms!
@@ -98,7 +98,7 @@ $\textrm{The Hamming distance $d(u, v)$ between two words $u$ and $v$ is the num
 Clearly, it's impossible for a linear code to reliably detect _and_ fix every single error that occurs. There's a limit, as we've already seen from the three simple examples on the last page. And as it turns out, we can mathematically define this limit.
 
 {% latexx type="fullwidth" %}
-$\textrm{The } \textbf{minimum distance } \textrm{$d(C)$ of $C$ (an $(n, m)$ code) is the smallest Hamming distance between distinct code words of $C$.}$
+$\textrm{The } \textbf{minimum distance } \textrm{$d(C)$ of $C$ (an $(n, m)$ code) is the smallest Hamming} \\\ \textrm{distance between distinct code words of $C$.}$
 {% /latexx %}
 
 In other words, the minimum distance is the smallest number of errors that can occur before one valid codeword transforms into _another_ valid codeword. Let's check the minimum distances of our three simple codes.
@@ -113,7 +113,7 @@ In other words, the minimum distance is the smallest number of errors that can o
 Now we define an _error processor_.
 
 {% latexx type="fullwidth" %}
-$\textrm{An } \textbf{error processor } \textrm{$P$ for $C$ is a map that produces a pair $(x, u)$ when given a codeword $v$ of length $n$. The value of $x$ represents whether the codeword was correct (either before or after correction), and $u$ is the decoded codeword} \textit{ if} \textrm{ the processor was able to correct the error(s).}$
+$\textrm{An } \textbf{error processor } \textrm{$P$ for $C$ is a map that produces a pair $(x, u)$ when given a codeword $v$ of length $n$.} \\\ \textrm{The value of $x$ represents whether the codeword was correct (either before or after correction),} \\\ \textrm{and $u$ is the decoded codeword} \textit{ if} \textrm{ the processor was able to correct the error(s).}$
 {% /latexx %}
 
 An error processor can correct errors of weight up to _t_ and detect errors of weight up to _s + t_ if and only if

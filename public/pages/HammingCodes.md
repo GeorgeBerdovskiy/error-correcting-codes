@@ -22,11 +22,9 @@ will be one of our parity bits.
 
 Then, our decoder will play a game of _yes_ or _no_ with the parity bits that represent their respective rows and columns. Each bit will count the number of columns or rows equal to 
 
-{% latexx %}
+{% latexx type="fullwidth" %}
 $n/2$
 {% /latexx %}
-
-.
 
 For example, a parity bit in the 8th column/row would count four columns/rows backwards from that number. We repeat this for every multiple of _n_ that is a power of two (i.e. 8). In the columns, we would count every 8 columns/rows and check four columns/rows. The parity checks count the total number of 1's in the respective row(s) or column(s) of a parity bit, add them up, and see if the total is an odd or even number. 
 
