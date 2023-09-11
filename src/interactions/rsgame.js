@@ -1,28 +1,66 @@
 // Function to find the smallest prime number greater than or equal to a given value
-function findSmallestPrimeGreaterOrEqual(value) {
+export function findSmallestPrimeGreaterOrEqual(value) {
     let num = value;
     while (true) {
-      num++;
-      if (isPrime(num)) {
-        return num;
-      }
+        num++;
+        if (isPrime(num)) {
+            return num;
+        }
     }
-  }
-  
-  // Function to check if a number is prime
-  function isPrime(num) {
+}
+
+// Function to check if a number is prime
+export function isPrime(num) {
     if (num <= 1) return false;
     if (num <= 3) return true;
     if (num % 2 === 0 || num % 3 === 0) return false;
     let i = 5;
     while (i * i <= num) {
-      if (num % i === 0 || num % (i + 2) === 0) return false;
-      i += 6;
+        if (num % i === 0 || num % (i + 2) === 0) return false;
+        i += 6;
     }
     return true;
-  }
-  
-  // Generate an array of 6 numbers with the last two as placeholders
+}
+
+// Function to print a 1x6 matrix
+export function printMatrix(array) {
+    let result = '';
+
+    for (let i = 0; i < array.length; ++i) {
+        if (i % 6 === 0 && i > 0) {
+            result += '\n';
+        }
+
+        result += "[" + array[i] + "] ";
+
+    }
+
+    console.log(result);
+}
+
+// Helper function to calculate the modular inverse
+export function modInverse(a, m) {
+    for (let x = 1; x < m; x++) {
+        if ((a * x) % m === 1) {
+            return x;
+        }
+    }
+    return 1;
+}
+
+// Helper function to calculate Lagrange Interpolation
+export function lagrangeInterpolation(x, j, p) {
+    let result = 1;
+    for (let m = 0; m < randomNumbers.length; m++) {
+        if (m !== j) {
+            result *= (x - m) * modInverse(j - m, p);
+            result %= p;
+        }
+    }
+    return result;
+}
+
+export function generateRandomArrayBlock(){
   const minRandomValue = 0;
   const maxRandomValue = 9;
   const randomNumbers = [
@@ -33,105 +71,128 @@ function findSmallestPrimeGreaterOrEqual(value) {
     -1, // Placeholder for m5 (out of range)
     -1, // Placeholder for m6 (out of range)
   ];
+
+  return randomNumbers;
+
+}
+
+//  new code section to cleaniup 
+// Function to encode the randomNumbers array
+export function encodeRandomNumbers(randomNumbers, numECCSymbols, smallestPrime) {
+    const totalCodewordSize = randomNumbers.length + numECCSymbols;
+    const codeword = [];
   
-  console.log("Note: m5 and m6 are placeholders.");
-  console.log("Generated Array of 6 Numbers:", randomNumbers);
-  
-  // Find the smallest prime greater than or equal to the maximum value among m1 to m4
-  const smallestPrime = findSmallestPrimeGreaterOrEqual(Math.max(...randomNumbers.slice(0, 4)));
-  console.log("Smallest Prime Modulus:", smallestPrime);
-  
-  // Encode the randomNumbers using Reed-Solomon with Lagrange Interpolation
-  const numECCSymbols = 2; // Number of error correction code symbols
-  const totalCodewordSize = randomNumbers.length + numECCSymbols;
-  const codeword = [];
-  
-  for (let i = 0; i < totalCodewordSize; i++) {
-    let value = 0;
-  
-    // Calculate the Reed-Solomon ECC symbols
-    for (let j = 0; j < randomNumbers.length; j++) {
-      if (randomNumbers[j] !== -1) {
-        const term = randomNumbers[j] * modInverse(i, smallestPrime) * lagrangeInterpolation(i, j, smallestPrime);
-        value += term;
-      }
-    }
-  
-    codeword.push(value % smallestPrime);
-  }
-  
-  console.log("Encoded Codeword:", codeword);
-  
-  // Simulate receiving a codeword (introduce errors)
-  const receivedCodeword = codeword.slice();
-  receivedCodeword[2] = 42; // Introduce an error by changing symbol 2
-  
-  console.log("Received Codeword (including errors):", receivedCodeword);
-  
-  // Calculate the noise
-  const noise = [];
-  for (let i = 0; i < codeword.length; i++) {
-    noise.push(receivedCodeword[i] - codeword[i]);
-  }
-  
-  console.log("Noise Added:", noise);
-  
-  // Introduce a random error in the original array
-  const errorIndex = Math.floor(Math.random() * randomNumbers.length); // Choose a random index
-  const originalValue = randomNumbers[errorIndex]; // Store the original value
-  const newValue = Math.floor(Math.random() * (maxRandomValue - minRandomValue + 1)) + minRandomValue; // Generate a new random value
-  randomNumbers[errorIndex] = newValue; // Introduce an error
-  
-  console.log("Array WITH ERROR:", randomNumbers);
-  
-  // Decode the received codeword using Reed-Solomon with Lagrange Interpolation
-  const decodedArray = [];
-  
-  for (let i = 0; i < randomNumbers.length; i++) {
-    if (randomNumbers[i] === -1) {
+    for (let i = 0; i < totalCodewordSize; i++) {
       let value = 0;
   
       // Calculate the Reed-Solomon ECC symbols
-      for (let j = 0; j < receivedCodeword.length; j++) {
-        const term = receivedCodeword[j] * lagrangeInterpolation(j, i, smallestPrime);
-        value += term;
+      for (let j = 0; j < randomNumbers.length; j++) {
+        if (randomNumbers[j] !== -1) {
+          const term = randomNumbers[j] * modInverse(i, smallestPrime) * lagrangeInterpolation(i, j, smallestPrime);
+          value += term;
+        }
       }
   
-      decodedArray.push(value % smallestPrime);
-    } else {
-      decodedArray.push(randomNumbers[i]);
+      codeword.push(value % smallestPrime);
     }
+  
+    return codeword;
   }
   
-  // Correct the error introduced earlier
-  decodedArray[errorIndex] = originalValue;
+  // Function to introduce errors to a codeword
+  export function introduceErrorsToCodeword(codeword, errorIndex, errorValue) {
+    const receivedCodeword = [...codeword];
+    receivedCodeword[errorIndex] = errorValue;
+    return receivedCodeword;
+  }
   
-  console.log("Decoded Array (including ECC symbols) with Error Corrected:", decodedArray);
+  // Function to calculate the noise between two codewords
+  export function calculateNoise(codeword, receivedCodeword) {
+    const noise = [];
+    for (let i = 0; i < codeword.length; i++) {
+      noise.push(receivedCodeword[i] - codeword[i]);
+    }
+    //printMatrix(noise);
+    return noise;
+  }
   
-  // Extract the original message part
-  const originalMessage = decodedArray.slice(0, randomNumbers.length);
+  // Function to introduce a random error to the original array
+  export function introduceRandomError(randomNumbers, minRandomValue, maxRandomValue) {
+    
+    const errorIndex = Math.floor(Math.random() * randomNumbers.length);
+    const originalValue = randomNumbers[errorIndex];
+    const newValue = Math.floor(Math.random() * (maxRandomValue - minRandomValue + 1)) + minRandomValue;
+    randomNumbers[errorIndex] = newValue;
+    //printMatrix(randomNumbers);
+    return randomNumbers;
+  }
+
+  // Function to decode a codeword
+  export function decodeCodeword(randomNumbers, receivedCodeword, smallestPrime) {
+    const decodedArray = [];
   
-  console.log("Original Message (excluding ECC symbols):", originalMessage);
+    for (let i = 0; i < randomNumbers.length; i++) {
+      if (randomNumbers[i] === -1) {
+        let value = 0;
   
-  // Helper function to calculate the modular inverse
-  function modInverse(a, m) {
-    for (let x = 1; x < m; x++) {
-      if ((a * x) % m === 1) {
-        return x;
+        // Calculate the Reed-Solomon ECC symbols
+        for (let j = 0; j < receivedCodeword.length; j++) {
+          const term = receivedCodeword[j] * lagrangeInterpolation(j, i, smallestPrime);
+          value += term;
+        }
+  
+        decodedArray.push(value % smallestPrime);
+      } else {
+        decodedArray.push(randomNumbers[i]);
       }
     }
-    return 1;
+  
+    return decodedArray;
   }
   
-  // Helper function to calculate Lagrange Interpolation
-  function lagrangeInterpolation(x, j, p) {
-    let result = 1;
-    for (let m = 0; m < randomNumbers.length; m++) {
-      if (m !== j) {
-        result *= (x - m) * modInverse(j - m, p);
-        result %= p;
-      }
-    }
-    return result;
-  }
-  
+  // Example usage:
+// Generate an array of 6 numbers with the last two as placeholders
+const minRandomValue = 0;
+const maxRandomValue = 9;
+
+console.log("Generating a 1x6 matrix...remember: m5,m6 are placeholders");
+let randomNumbers = generateRandomArrayBlock();
+//using print matrix
+printMatrix(randomNumbers);
+let randomnumbers = [...randomNumbers];
+
+console.log();
+
+// Find the smallest prime greater than or equal to the maximum value among m1 to m4
+const smallestPrime = findSmallestPrimeGreaterOrEqual(Math.max(...randomNumbers.slice(0, 4)));
+console.log("Smallest Prime Modulus:", smallestPrime);
+
+
+// Encode the randomNumbers using Reed-Solomon with Lagrange Interpolation
+const numECCSymbols = 2; // Number of error correction code symbols
+const codeword = encodeRandomNumbers(randomNumbers, numECCSymbols, smallestPrime);
+
+console.log("Encoded Codeword:", codeword);
+
+const errorIndex = Math.floor(Math.random() * randomNumbers.length);
+const errorValue = Math.floor(Math.random() * (maxRandomValue - minRandomValue + 1)) + minRandomValue;
+const receivedCodeword = introduceErrorsToCodeword(codeword, errorIndex, errorValue);
+
+console.log("Received Codeword (including errors):", receivedCodeword);
+
+console.log("Noise Added ");
+const noise = calculateNoise(codeword, receivedCodeword);
+//printMatrix(noise);
+//console.log();
+
+
+console.log("Array WITH ERROR:");
+randomNumbers = introduceRandomError(randomNumbers, minRandomValue, maxRandomValue);
+printMatrix(randomNumbers);
+console.log();
+
+const decodedArray = decodeCodeword(randomNumbers, receivedCodeword, smallestPrime);
+console.log("Decoded Array (including ECC symbols) with Error Corrected:");
+printMatrix(randomnumbers)  ;
+console.log();
+
