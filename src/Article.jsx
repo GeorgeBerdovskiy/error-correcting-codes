@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 
-import { latexx } from './schema/Callout.markdoc';
+import { latexx } from './schema/Latexx.markdoc';
 import { interaction } from './schema/Interaction.markdoc';
+import { imagee } from './schema/Imagee.markdoc';
+
 import Latex from 'react-latex-next';
 import Markdoc from '@markdoc/markdoc';
+
 import Interaction from './Interaction';
+
 import 'katex/dist/katex.min.css';
+
+function ImageFunction({children}) {
+	return (
+		<div className='image'>
+			{ children.props.children }
+		</div>
+	)
+}
 
 function InteractionFunction({children}) {
   return (
@@ -32,7 +44,8 @@ function LatexFunction({type, children}) {
 const config = {
   tags: {
     latexx,
-    interaction
+    interaction,
+	imagee
   }
 };
 
@@ -85,7 +98,8 @@ const Article = () => {
 				Markdoc.renderers.react(content, React, {
 					components: {
 						LatexFunction: LatexFunction,
-						Interaction: InteractionFunction
+						Interaction: InteractionFunction,
+						ImageFunction: ImageFunction
 					}
 				})
 			}

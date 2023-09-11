@@ -19,6 +19,10 @@ A **channel** is any medium for the transfer of information. Common examples inc
 
 When data is sent through a channel, it always has a **sender** and a **receiver**. Sometimes they are obvious. When shouting to your friend at a loud concert, you're the sender, your friend is the receiver, and the air at the concert is the channel. Sometimes the two are less clear. When data is stored on your computer, your _present_ self is the sender and your _future_ self is the receiver.
 
+{% imagee %}
+![Interference](/images/introduction/Interference.png)
+{% /imagee %}
+
 ### Discrete and Continuous Channels
 In a **discrete** channel, data is delivered in "chunks." In a **continuous** channel, data is delivered as a constant stream. Assume that throughout the rest of this blog, all channels will be **discrete**.
 

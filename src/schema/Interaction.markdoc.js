@@ -1,5 +1,3 @@
-// ./schema/Callout.markdoc.js
-
 export const interaction = {
     render: 'Interaction',
     children: ['paragraph', 'tag', 'list'],
