@@ -1,0 +1,9 @@
+table {
+	display: block;
+	margin: 0 auto;
+	width: fit-content;
+}
+
+table button {
+	margin-right: 8px;
+}

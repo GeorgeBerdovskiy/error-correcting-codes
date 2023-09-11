@@ -27,11 +27,15 @@ $\texttt{1100001} \rightarrow a \\\ \texttt{1011010} \rightarrow Z \\\ \texttt{0
 
 This means we can use the first bit as a _parity check_. The term _parity_ is the mathematical term for evenness or oddness. If the number of 1s in the byte is even, we set the parity bit to 0. If the number of 1s in the byte is odd, we set the parity bit to 1.
 
-{% latexx %}
+{% latexx type="fullwidth" %}
 $\texttt{\underline{1}1100001} \rightarrow a \\\ \texttt{\underline{0}1011010} \rightarrow Z \\\ \texttt{\underline{1}0100101} \rightarrow \\%$
 {% /latexx %}
 
-"Now if a byte is transferred and one of the bits goes wrong, then the number of ls becomes odd. So the receiver can ask for a retransmission. There is no way the receiver can tell which bit went wrong, and if two bits are incorrect the receiver will let the byte through."
+If one of these bits is flipped during transfer, the number of 1s will no longer match the parity bit. Although the receiver cannot _correct_ this error, it can _detect_ it. However, if _two_ bits are incorrect, the receiver will accept the byte as valid.
+
+{% interaction %}
+1
+{% /interaction %}
 
 ## The Triple Repitition Code
 Another simple code is the _triple repitition code_, in which we repeat our message three times. Our decoder will read all three copies of the message, and if one differs from the other two it assumes the other two are correct.
@@ -42,15 +46,5 @@ If all three differ, then it knows there's an error but cannot determine where t
 2
 {% /interaction %}
 
-## Comparison
-Now that we've briefly explored three simple codes, how can we compare them and see which is best? It's necessary to now introduce several definitons.
-
-{% latexx %}
-$\textrm{If A is an alphabet an A-word or A-block of length n is a sequence of n symbols from A. The set of A-words of length n is denoted by An.}$
-{% /latexx %}
-
-And now that we've defined a block, let's formally define a block code:
-
-{% latexx %}
-$\textrm{An (n, m)-block code C over the alphabet A of size qconsists of a set of precisely qm code words in An.}$
-{% /latexx %}
+## References
+- Pretzel, Oliver. _Error-Correcting Codes and Finite Fields._ Oxford University Press, 1992. 
