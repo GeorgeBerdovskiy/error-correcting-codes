@@ -137,7 +137,9 @@ Then plug in x = 0, 1, 2, 3 to find our original values and fill in any holes.
 
 We have now encoded and retrieved successfully all of our data! 
 
-{% interaction %} 5 {% /interaction %}
+{% interaction %}
+5
+{% /interaction %}
 
 Sources: vcubingx (Youtube), GeeksforGeeks.org
     
