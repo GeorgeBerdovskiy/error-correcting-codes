@@ -1,6 +1,6 @@
-# Definition
+# Encoders, Error Processors, and Decoders
 
-Now that we have simple definitions for **messages**, **channels**, **senders**, and **receivers**, let's introduce some formal definitions to guide our work.
+Now that we have simple definitions for **messages**, **channels**, **senders**, and **receivers**, let's introduce definitions for errors, encoding, error processing, and decoding.
 
 ## Errors
 ### Random Error Channel

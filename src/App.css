@@ -180,7 +180,8 @@ input[type="text"].mono {
 }
 
 span.__Latex__ {
-	margin-top: -4px;
+	margin-left: 8px;
+	margin-right: 8px;
 }
 
 .menu-button {
@@ -209,7 +210,7 @@ span.__Latex__ {
 	height: 100%;
 }
 
-h1, h2 {
+h1, h2, h3 {
 	width: 100%;
 }
 
@@ -232,6 +233,16 @@ h2 {
 	margin-bottom: 24px;
 }
 
+h3 {
+	font-family: "Manrope", sans-serif;
+	font-size: 1.25rem;
+	line-height: 1.25rem;
+	color: #798180;
+
+	margin: 0px;
+	margin-bottom: 24px;
+}
+
 p {
 	font-family: "Manrope", sans-serif;
 	font-weight: 400;
@@ -240,6 +251,17 @@ p {
 
 	margin: 0px;
 	margin-bottom: 16px;
+}
+
+ul {
+	font-family: "Manrope", sans-serif;
+	font-weight: 400;
+	font-size: 1rem;
+	line-height: 1.5rem;
+
+	margin: 0px;
+	margin-bottom: 16px;
+	width: 100%;
 }
 
 * {

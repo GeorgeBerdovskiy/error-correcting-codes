@@ -21,12 +21,12 @@ function InteractionFunction({children}) {
 function LatexFunction({type, children}) {
 	if (type == "fullwidth") {
 		return <div className='fullwidth-latex'>
-			<Latex>{children.props.children}</Latex>;
+			<Latex>{children.props.children}</Latex>
 		</div>
 	}
 
 	// LaTeX is rendered inline by default
-	return <Latex>{children.props.children}</Latex>;
+	return <Latex>{children.props.children}</Latex>
 }
 
 const config = {
@@ -60,6 +60,9 @@ const Article = () => {
 		switch (id) {
 			case "introduction":
 				setActivePage("Introduction");
+				break;
+			case "encoders-processors-decoders":
+				setActivePage("E_EP_D");
 				break;
 			case "definitions":
 				setActivePage("Definitions");
