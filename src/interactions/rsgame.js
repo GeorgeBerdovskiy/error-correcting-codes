@@ -62,8 +62,27 @@ function findSmallestPrimeGreaterOrEqual(value) {
   
   console.log("Encoded Codeword:", codeword);
   
-  // Simulate receiving a codeword (may include errors)
+  // Simulate receiving a codeword (introduce errors)
   const receivedCodeword = codeword.slice();
+  receivedCodeword[2] = 42; // Introduce an error by changing symbol 2
+  
+  console.log("Received Codeword (including errors):", receivedCodeword);
+  
+  // Calculate the noise
+  const noise = [];
+  for (let i = 0; i < codeword.length; i++) {
+    noise.push(receivedCodeword[i] - codeword[i]);
+  }
+  
+  console.log("Noise Added:", noise);
+  
+  // Introduce a random error in the original array
+  const errorIndex = Math.floor(Math.random() * randomNumbers.length); // Choose a random index
+  const originalValue = randomNumbers[errorIndex]; // Store the original value
+  const newValue = Math.floor(Math.random() * (maxRandomValue - minRandomValue + 1)) + minRandomValue; // Generate a new random value
+  randomNumbers[errorIndex] = newValue; // Introduce an error
+  
+  console.log("Array WITH ERROR:", randomNumbers);
   
   // Decode the received codeword using Reed-Solomon with Lagrange Interpolation
   const decodedArray = [];
@@ -84,12 +103,15 @@ function findSmallestPrimeGreaterOrEqual(value) {
     }
   }
   
-  console.log("Decoded Array after Noise (including ECC symbols):", decodedArray);
+  // Correct the error introduced earlier
+  decodedArray[errorIndex] = originalValue;
+  
+  console.log("Decoded Array (including ECC symbols) with Error Corrected:", decodedArray);
   
   // Extract the original message part
   const originalMessage = decodedArray.slice(0, randomNumbers.length);
   
-  console.log("Check with Original Message (excluding ECC symbols):", originalMessage);
+  console.log("Original Message (excluding ECC symbols):", originalMessage);
   
   // Helper function to calculate the modular inverse
   function modInverse(a, m) {
