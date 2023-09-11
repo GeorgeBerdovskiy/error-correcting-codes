@@ -58,9 +58,6 @@ const Article = () => {
 	useEffect(() => {
 		console.log(`id is ${id}`)
 		switch (id) {
-			case "introduction":
-				setActivePage("Introduction");
-				break;
 			case "encoders-processors-decoders":
 				setActivePage("E_EP_D");
 				break;
@@ -77,7 +74,7 @@ const Article = () => {
 				setActivePage("ReedSolomonCodes");
 				break;
 			default:
-				setActivePage("NotFound");
+				setActivePage("Introduction");
 				break;
 		}
 	}, [id]);
