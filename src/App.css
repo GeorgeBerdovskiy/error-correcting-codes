@@ -264,6 +264,25 @@ ul {
 	width: 100%;
 }
 
+blockquote {
+	color: var(--color-orange);
+
+	padding: 8px;
+	padding-left: 16px;
+
+	margin: 0px;
+	margin-bottom: 16px;
+
+	border-left: 4px solid var(--color-orange);
+
+	width: 100%;
+}
+
+blockquote p {
+	font-weight: 800;
+	margin: 0px;
+}
+
 * {
 	box-sizing: border-box;
 }

@@ -29,7 +29,6 @@ const Sidebar = () => {
 
 	// Highlight active anchor
 	let activePath = window.location.pathname.split('/')[1];
-	//document.getElementById(activePath).classList.add("active");
 
 	return (
 		<div className='left'>
@@ -37,9 +36,8 @@ const Sidebar = () => {
 
 			<div className='page-buttons'>
 				<a className={`${activePath == "introduction" ? "active" : ""}`} href="introduction">Introduction</a>
-				<a className={`${activePath == "encoders-processors-decoders" ? "active" : ""}`} href="encoders-processors-decoders">Encoders, Processors, Decoders</a>
-				<a className={`${activePath == "definitions" ? "active" : ""}`} href="definitions">Definitions</a>
 				<a className={`${activePath == "simple-codes" ? "active" : ""}`} href="simple-codes">Three Simple Codes</a>
+				<a className={`${activePath == "definitions" ? "active" : ""}`} href="definitions">Definitions</a>
 				<a className={`${activePath == "hamming" ? "active" : ""}`} href="hamming">Hamming Codes</a>
 				<a className={`${activePath == "reed-solomon" ? "active" : ""}`} href="reed-solomon">Reed-Solomon Codes</a>
 			</div>

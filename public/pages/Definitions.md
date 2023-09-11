@@ -65,7 +65,62 @@ then
 
 the bits we receive are completely independent of the original message and our decoding efforts will be pointless.
 
-# Encoder
-For now, we'll use casual definitions of an encoder, error proccessor, and decoder.
+## Encoder and Decoder
+First, we must define the _block code_.
 
-An **encoder** is a function that
+{% latexx type="fullwidth" %}
+$\textrm{An ($n ,m$)-block code $C$ over the alphabet $A$ of size $q$ \\\ consists of a set of precisely $q^{m}$ \textit{code words} in $A^{n}$}$
+{% /latexx %}
+
+Now, we can define the _encoder_ and _decoder_.
+
+{% latexx type="fullwidth" %}
+$\textrm{An encoder $E$ for $C$ is a map from $A^{m}$ to $C$. It translates any $A$-word $x$ of length $m$ into a code word $u = E(x)$. \\\ The encoder is a} \textit{ bijective } \textrm{function.}$
+{% /latexx %}
+
+{% latexx type="fullwidth" %}
+$\textrm{A decoder $D$ is the inverse map of $E$, mapping every $u = E(x)$ back to $x$.}$
+{% /latexx %}
+
+## Weight and Distance
+It's also helpful to define two more terms, _weight_, _Hamming distance_, and _minimum distance_. That's because we can use them to describe the effectiveness of a code.
+
+{% latexx type="fullwidth" %}
+$\textrm{If $u = (0, 1, 0, 1, 0, 0)$ is sent and $v = \(\color{red} 1 \color{black}, \color{red} 0 \color{black}, 0, 1, 0, 0)$ is received, an error of weight 2 has happened.}$
+{% /latexx %}
+
+{% latexx type="fullwidth" %}
+$\textrm{The Hamming distance $d(u, v)$ between two words $u$ and $v$ is the number of entries in which they differ. The Hamming weight wt($u$) of $u$ is the number of non-null entries in $u$.}$
+{% /latexx %}
+
+> Note that the Hamming distance satisfies the distance axioms!
+
+Clearly, it's impossible for a linear code to reliably detect _and_ fix every single error that occurs. There's a limit, as we've already seen from the three simple examples on the last page. And as it turns out, we can mathematically define this limit.
+
+{% latexx type="fullwidth" %}
+$\textrm{The } \textbf{minimum distance } \textrm{$d(C)$ of $C$ (an $(n, m)$ code) is the smallest Hamming distance between distinct code words of $C$.}$
+{% /latexx %}
+
+In other words, the minimum distance is the smallest number of errors that can occur before one valid codeword transforms into _another_ valid codeword. Let's check the minimum distances of our three simple codes.
+
+- The parity check code has a minimum distance of **2**
+- The triple repitition code has a minimum distance of **3**
+- The triple check code also has a minimum distance of **3**
+
+> This idea is very similar to the Pigeonhole Principle! If the "pigeons" are errors and the number of baskets (errors that can occur _before_ hitting another valid codeword) is one, what's the smallest number of pigeons required to hit another codeword? Clearly it's two.
+
+## Error Processor
+Now we define an _error processor_.
+
+{% latexx type="fullwidth" %}
+$\textrm{An } \textbf{error processor } \textrm{$P$ for $C$ is a map that produces a pair $(x, u)$ when given a codeword $v$ of length $n$. The value of $x$ represents whether the codeword was correct (either before or after correction), and $u$ is the decoded codeword} \textit{ if} \textrm{ the processor was able to correct the error(s).}$
+{% /latexx %}
+
+An error processor can correct errors of weight up to _t_ and detect errors of weight up to _s + t_ if and only if
+
+{% latexx type="fullwidth" %}
+$d(C) \ge 2t + s + 1$
+{% /latexx %}
+
+## References
+- Pretzel, Oliver. _Error-Correcting Codes and Finite Fields._ Oxford University Press, 1992. 
