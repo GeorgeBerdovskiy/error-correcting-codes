@@ -1,23 +1,12 @@
-// Function to find the smallest prime number greater than a given value
-function findSmallestPrimeGreaterThan(value) {
-    let num = value + 1;
+// Function to find the smallest prime number greater than or equal to a given value
+function findSmallestPrimeGreaterOrEqual(value) {
+    let num = value;
     while (true) {
+      num++;
       if (isPrime(num)) {
         return num;
       }
-      num++;
     }
-  }
-  
-  function lagrangeInterpolation(numbers, modulus) {
-    const x1 = numbers[0];
-    const x2 = numbers[1];
-    const x3 = numbers[2];
-    const x4 = numbers[3];
-  
-    // Calculate the Lagrange interpolation equation with the provided modulus
-    const equation = `(x - ${x2}) * (x - ${x3}) * (x - ${x4}) / ((${x1} - ${x2}) * (${x1} - ${x3}) * (${x1} - ${x4}) * (${x2} - ${x3}) * (${x2} - ${x4}) * (${x3} - ${x4})) % ${modulus}`;
-    return equation;
   }
   
   // Function to check if a number is prime
@@ -33,25 +22,6 @@ function findSmallestPrimeGreaterThan(value) {
     return true;
   }
   
-  // Function to evaluate an equation with 'i' as a variable and handle modular arithmetic
-  function evaluateEquation(equation, i, modulus) {
-    try {
-      // Parse the equation, replacing 'x' with 'i'
-      const parsedEquation = equation.replace(/x/g, i.toString());
-  
-      // Evaluate the parsed equation
-      let result = eval(parsedEquation);
-  
-      // Ensure the result is positive by taking the modulus
-      result = (result % modulus + modulus) % modulus;
-  
-      return result;
-    } catch (error) {
-      console.error("Error evaluating equation:", error);
-      return null;
-    }
-  }
-  
   // Generate an array of 6 numbers with the last two as placeholders
   const minRandomValue = 0;
   const maxRandomValue = 9;
@@ -64,53 +34,82 @@ function findSmallestPrimeGreaterThan(value) {
     -1, // Placeholder for m6 (out of range)
   ];
   
-  // Print a note that m5 and m6 are placeholders
   console.log("Note: m5 and m6 are placeholders.");
+  console.log("Generated Array of 6 Numbers:", randomNumbers);
   
-  // Find the smallest prime greater than m1 through m4
-  const smallestPrime = findSmallestPrimeGreaterThan(Math.max(...randomNumbers.slice(0, 4)));
+  // Find the smallest prime greater than or equal to the maximum value among m1 to m4
+  const smallestPrime = findSmallestPrimeGreaterOrEqual(Math.max(...randomNumbers.slice(0, 4)));
+  console.log("Smallest Prime Modulus:", smallestPrime);
   
-  // Calculate the Lagrange interpolation equation with the modulus found
-  const interpolationEquation = lagrangeInterpolation(randomNumbers, smallestPrime);
+  // Encode the randomNumbers using Reed-Solomon with Lagrange Interpolation
+  const numECCSymbols = 2; // Number of error correction code symbols
+  const totalCodewordSize = randomNumbers.length + numECCSymbols;
+  const codeword = [];
   
-  // Output the original array
-  console.log(`Generated Array of 6 Numbers: ${randomNumbers}`);
-  console.log(`Lagrange Interpolation Equation: ${interpolationEquation}`);
-  console.log(`Smallest Prime Modulus: ${smallestPrime}`);
+  for (let i = 0; i < totalCodewordSize; i++) {
+    let value = 0;
   
-  // Add noise to the array
-  console.log("Input successfully encoded, let's add noise!");
-  for (let i = 0; i < 1; i++) {
-    const randomIndex = Math.floor(Math.random() * 4); // Only randomize m1 to m4
-    const newValue = Math.floor(Math.random() * (maxRandomValue - minRandomValue + 1)) + minRandomValue;
-    randomNumbers[randomIndex] = newValue;
-  }
-  
-  // Output the modified array after adding noise
-  console.log(`Output After Adding Noise: ${randomNumbers}`);
-  
-  // Function to correct errors using Reed-Solomon encoding
-  function correctErrorsWithReedSolomon(randomNumbers, interpolationEquation, smallestPrime) {
-    const correctedArray = randomNumbers.slice(); // Copy the array
-  
-    // Correct errors in the array
-    for (let i = 4; i < 6; i++) {
-      const expectedValue = evaluateEquation(interpolationEquation, i, smallestPrime);
-      correctedArray[i] = Math.round(expectedValue); // Use regular numbers
+    // Calculate the Reed-Solomon ECC symbols
+    for (let j = 0; j < randomNumbers.length; j++) {
+      if (randomNumbers[j] !== -1) {
+        const term = randomNumbers[j] * modInverse(i, smallestPrime) * lagrangeInterpolation(i, j, smallestPrime);
+        value += term;
+      }
     }
   
-    return correctedArray;
+    codeword.push(value % smallestPrime);
   }
   
-  console.log("Correcting the Errors with Reed-Solomon Encoding:");
+  console.log("Encoded Codeword:", codeword);
   
-  // Correct errors in the array
-  const correctedArray = correctErrorsWithReedSolomon(randomNumbers, interpolationEquation, smallestPrime);
+  // Simulate receiving a codeword (may include errors)
+  const receivedCodeword = codeword.slice();
   
-  // Output the corrected array
-  console.log(`Corrected Array excluding last two placeholder indices: ${correctedArray}`);
-
-
+  // Decode the received codeword using Reed-Solomon with Lagrange Interpolation
+  const decodedArray = [];
   
+  for (let i = 0; i < randomNumbers.length; i++) {
+    if (randomNumbers[i] === -1) {
+      let value = 0;
   
+      // Calculate the Reed-Solomon ECC symbols
+      for (let j = 0; j < receivedCodeword.length; j++) {
+        const term = receivedCodeword[j] * lagrangeInterpolation(j, i, smallestPrime);
+        value += term;
+      }
+  
+      decodedArray.push(value % smallestPrime);
+    } else {
+      decodedArray.push(randomNumbers[i]);
+    }
+  }
+  
+  console.log("Decoded Array after Noise (including ECC symbols):", decodedArray);
+  
+  // Extract the original message part
+  const originalMessage = decodedArray.slice(0, randomNumbers.length);
+  
+  console.log("Check with Original Message (excluding ECC symbols):", originalMessage);
+  
+  // Helper function to calculate the modular inverse
+  function modInverse(a, m) {
+    for (let x = 1; x < m; x++) {
+      if ((a * x) % m === 1) {
+        return x;
+      }
+    }
+    return 1;
+  }
+  
+  // Helper function to calculate Lagrange Interpolation
+  function lagrangeInterpolation(x, j, p) {
+    let result = 1;
+    for (let m = 0; m < randomNumbers.length; m++) {
+      if (m !== j) {
+        result *= (x - m) * modInverse(j - m, p);
+        result %= p;
+      }
+    }
+    return result;
+  }
   
