@@ -69,7 +69,7 @@ const HammingGuessingGame = () => {
 	};
 
 	const renderTable = () => {
-		if (matrix.length === 0) {
+		if (incorrectBlock.length === 0) {
 			return null; // Return null if the matrix is empty
 		}
 
@@ -77,7 +77,7 @@ const HammingGuessingGame = () => {
 		for (let rowIndex = 0; rowIndex < 4; rowIndex++) {
 			const rowCells = [];
 			for (let colIndex = 0; colIndex < 4; colIndex++) {
-				const cellValue = matrix[rowIndex * 4 + colIndex];
+				const cellValue = incorrectBlock[rowIndex * 4 + colIndex];
 				const renderedValue = cellValue ? 1 : 0; // Convert boolean to integer
 				rowCells.push(
 					<td key={colIndex}>
